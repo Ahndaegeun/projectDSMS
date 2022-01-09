@@ -1,0 +1,105 @@
+package service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.ChatDAOImpl;
+import dao.IChatDAO;
+import vo.ChatDetailVO;
+import vo.ChatListVO;
+import vo.ChatRoomVO;
+
+public class ChatServiceImpl implements IChatService {
+	private IChatDAO dao;
+	private static ChatServiceImpl service;
+
+	private ChatServiceImpl() {
+		dao = ChatDAOImpl.getInstance();
+
+	}
+
+	public static ChatServiceImpl getInstacne() {
+		if (service == null) {
+			service = new ChatServiceImpl();
+		}
+		return service;
+	}
+
+	@Override
+	public List<ChatListVO> getAllChatRooms(int member_idx) {
+		List<Integer> roomList = dao.getRoomList(member_idx);
+		List<ChatListVO> result = new ArrayList<>();
+
+		for (Integer item : roomList) {
+			ChatListVO vo = new ChatListVO();
+			List<String> user = dao.getRoomUser(item);
+			String allUser = String.join(",", user);
+			String lastContent = dao.getLastContent(item);
+
+			vo.setChat_detail_content(lastContent);
+			vo.setMember_name(allUser);
+			vo.setChat_room_idx(item);
+
+			result.add(vo);
+		}
+		return result;
+	}
+	
+	@Override
+	public List<ChatListVO> searchChatRoom(String member_name) {
+		List<Integer> chatRoomList = dao.searchChatRoom(member_name);
+		List<ChatListVO> result = new ArrayList<>();
+		
+		for (Integer item : chatRoomList) {
+			ChatListVO vo = new ChatListVO();
+			List<String> user = dao.getRoomUser(item);
+			String allUser = String.join(",", user);
+			String lastContent = dao.getLastContent(item);
+			
+			vo.setChat_detail_content(lastContent);
+			vo.setMember_name(allUser);
+			vo.setChat_room_idx(item);
+			
+			result.add(vo);
+		}
+		return result;
+	}
+
+	@Override
+	public List<ChatDetailVO> getOneChatRoom(ChatDetailVO cdvo) {
+		List<ChatDetailVO> oneChatRoom = dao.getOneChatRoom(cdvo);
+		List<String> roomUser = dao.getRoomUser(cdvo.getChat_room_idx());
+		String user = String.join(",", roomUser);
+		
+		for (ChatDetailVO vo : oneChatRoom) {
+			vo.setAll_member_name(user);
+		}
+		return oneChatRoom;
+	}
+
+	@Override
+	public boolean delChatRoom(ChatRoomVO crvo, ChatDetailVO cdvo) {
+		return dao.delChatRoom(crvo, cdvo);
+	}
+
+	@Override
+	public boolean createChatRoom(ChatRoomVO crvo) {
+		boolean flag = false;
+
+		if (dao.createChatRoom(crvo)) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean sendChat(ChatDetailVO cdvo) {
+		boolean flag = false;
+
+		if (dao.sendChat(cdvo)) {
+			flag = true;
+		}
+		return flag;
+	}
+
+}

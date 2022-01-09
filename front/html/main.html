@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대덕 인재 개발원</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+
+  <script src="../js/jquery.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body>
+<div class="body__container">
+  <nav>
+    <ul>
+      <li class="logo"><img src="../storage/img/Logo.png" alt="logo"></li>
+      <li class="home-nav"><button class="clicked">홈</button></li>
+      <li class="board-nav"><button>게시판</button></li>
+      <li class="manage-nav">
+        <button>학생관리</button>
+        <ul class="student-nav-wrap nav-hidden">
+          <li class="student-info-nav"><button>학생 정보 열람</button></li>
+          <li class="student-attend-nav"><button>학생 출결 관리</button></li>
+          <li class="student-cons-nav"><button>상담 일지</button></li>
+          <li class="schedule-nav"><button>일정 관리</button></li>
+        </ul>
+      </li>
+      <li class="employ-nav"><button>취업 분포도</button></li>
+      <li class="chat-nav"><button>채팅</button></li>
+      <li class="my-nav"><button>마이페이지</button></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section class="home-section main-view-hidden">
+      <article class="latest-posts-wrap">
+        <div class="inner">
+          <h2>최신글</h2>
+          <ul class="posts-list">
+            <li class="list-item">
+              <a class="item-link" href="/">
+                <span class="item-div">공지</span>
+                <span class="item-title">디자인을 위한 제목입니다. 디자인 하기가 정말로 매우싫어요 언제까지 퍼블리싱을 해야되는 걸까요?...</span>
+                <span class="item-author">원장님</span>
+                <span class="item-date">2021.01.01 11:11</span>
+              </a>
+            </li>
+            <li class="list-item">
+              <a class="item-link" href="/">
+                <span class="item-div">공지</span>
+                <span class="item-title">디자인을 위한 제목입니다. 디자인 하기가 정말로 매우싫어요 언제까지 퍼블리싱을 해야되는 걸까요?...</span>
+                <span class="item-author">원장님</span>
+                <span class="item-date">2021.01.01 11:11</span>
+              </a>
+            </li>
+            <li class="list-item">
+              <a class="item-link" href="/">
+                <span class="item-div">공지</span>
+                <span class="item-title">디자인을 위한 제목입니다. 디자인 하기가 정말로 매우싫어요 언제까지 퍼블리싱을 해야되는 걸까요?...</span>
+                <span class="item-author">원장님</span>
+                <span class="item-date">2021.01.01 11:11</span>
+              </a>
+            </li>
+            <li class="list-item">
+              <a class="item-link" href="/">
+                <span class="item-div">공지</span>
+                <span class="item-title">디자인을 위한 제목입니다. 디자인 하기가 정말로 매우싫어요 언제까지 퍼블리싱을 해야되는 걸까요?...</span>
+                <span class="item-author">원장님</span>
+                <span class="item-date">2021.01.01 11:11</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article class="area-rank-wrap">
+        <div class="inner">
+          <h2>취업 지역 랭크</h2>
+          <div class="chart"></div>
+        </div>
+      </article>
+      <article class="now-time-wrap">
+        <div class="inner">
+          <div class="day"></div>
+          <div class="month"></div>
+          <div class="time"></div>
+        </div>
+      </article>
+      <article class="this-week-schedule-wrap">
+        <div class="inner">
+          <h2>이번 주 일정</h2>
+          <ul class="schedule">
+            <li>- 9.12. 6:30 칼퇴 기모띠</li>
+            <li>- 9.12. 6:30 칼퇴 기모띠</li>
+            <li>- 9.12. 6:30 칼퇴 기모띠</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="board-section">
+
+      <article class="board-list-wrap board-hidden">
+
+        <div class="board-head">
+          <form id="search-board-frm" action="/" method="POST">
+            <input type="text">
+            <button type="button">검색</button>
+          </form>
+        </div>
+  
+        <div class="board-body">
+          <div class="board-page-wrap">
+            <ul>
+              <li>Pages</li>
+              <li><a href="#">1</a></li>
+              <li class="page-click"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+            </ul>
+            <button class="go-to-write" type="button">글 작성</button>
+          </div>
+
+          <div class="board-list">
+            <ul class="list-header">
+              <li>구분</li>
+              <li>제목</li>
+              <li>작성자</li>
+              <li>작성일</li>
+              <li>조회수</li>
+            </ul>
+
+            <ul class="list-body">
+              <li class="notice-item">
+                <span class="division">공지</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">관리자</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="notice-item">
+                <span class="division">공지</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">관리자</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="notice-item">
+                <span class="division">공지</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">관리자</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="notice-item">
+                <span class="division">공지</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">관리자</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="notice-item">
+                <span class="division">공지</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">관리자</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="press-item">
+                <span class="division">긴급</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">안대근</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="press-item">
+                <span class="division">긴급</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">안대근</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="press-item">
+                <span class="division">긴급</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">안대근</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+              <li class="normal-item">
+                <span class="division">4147</span>
+                <span class="title">디자인을 위한 제목 입니다. 디자인 하기가 정말로 매우 많이 귀찮네요... 언제쯤 퍼블리싱을 그만 할 수 있을까요...?</span>
+                <span class="author">임창균</span>
+                <span class="date">2021-01-01</span>
+                <span class="hit-count">1,000</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </article>
+
+      <article class="board-write-wrap">
+        <form id="write-wrap-frm" action="">
+          <ul class="top">
+            <li class="title-wrap">
+              <input type="text" class="title">
+              <button type="button" class="modify-btn">수정</button>
+            </li>
+            <li class="description">
+              <input type="file" class="file">
+            </li>
+          </ul>
+        </form>
+      </article>
+
+      <article class="board-detail-wrap board-hidden">
+        <div class="inner">
+
+          <ul class="top">
+            
+            <li class="title-wrap">
+              <div class="title">This is Title</div>
+              <div class="title-btn-wrap">
+                <button type="button" class="modify-btn">수정</button>
+                <button type="button" class="delete-btn">삭제</button>
+              </div>
+            </li>
+            <li class="description">
+              <span class="author">관리자</span>
+              <span class="date">2021.01.01</span>
+              <span class="hit-count">조회수 <span class="count">1,000</span></span>
+              <span class="file"><a href="/">첨부파일</a></span>
+            </li>
+          </ul>
+
+          <div class="content">
+            글 작성 부분 어쩌고 저쩌고 졸려 죽겠다 진짜로 퍼블리싱 너무 귀찮아요
+          </div>
+
+          <div class="comment">
+            <ul class="comment-list">
+              <li class="comment-item">
+                <div class="info">
+                  <span class="author">안대근 <span class="date">2021.01.01</span></span>
+                  <div class="info-btns">
+                    <button type="button" class="modify-btn">수정</button>
+                    <button type="button" class="delete-btn">삭제</button>
+                  </div>
+                </div>
+                <div class="content">
+                  테스트 댓글 입니다.
+                </div>
+              </li>
+              <li class="comment-item">
+                <div class="info">
+                  <span class="author">안대근 <span class="date">2021.01.01</span></span>
+                  <div class="info-btns">
+                    <button type="button" class="modify-btn">수정</button>
+                    <button type="button" class="delete-btn">삭제</button>
+                  </div>
+                </div>
+                <div class="content">
+                  테스트 댓글 입니다.
+                </div>
+              </li>
+            </ul>
+            <form action="">
+              <textarea></textarea>
+              <button type="button">등록</button>
+            </form>
+          </div>
+
+        </div>
+      </article>
+      
+      <article class="board-modify-wrap board-hidden"></article>
+
+    </section>
+    
+    <section class="student-section main-view-hidden"></section>
+    
+    <section class="employ-section main-view-hidden">
+      <div id="map" style="width: 90%; height: 80%;"></div>
+    </section>
+    
+    <section class="chat-section main-view-hidden"></section>
+
+    <section class="my-section main-view-hidden">
+      <div class="inner">
+        <form id="my-frm" action="" method="POST">
+          <div class="id-wrap">
+            <div class="label">아이디</div>
+            <input type="hidden" value="userid">
+            <div class="user-id">adg0807</div>
+          </div>
+          <div class="pass-wrap">
+            <label for="user-pw">비밀번호</label>
+            <div class="pw-icon-wrap">
+              <input id="user-pw" type="password">
+              <img src="../storage/img/ckIcon.png" alt="check-icon">
+            </div>
+            <div class="pass-text">비밀번호를 입력해 주세요.</div>
+          </div>
+          <div class="pass-ck-wrap">
+            <label for="user-pw-ck">비밀번호 확인</label>
+            <div class="pw-ck-icon-wrap">
+              <input id="user-pw-ck" type="password">
+              <img src="../storage/img/ckIcon.png" alt="check-icon">
+            </div>
+            <div class="pass-ck-text">비밀번호를 입력해 주세요.</div>
+          </div>
+          <div class="name-wrap">
+            <div class="label">이름</div>
+            <input type="hidden" value="username">
+            <div class="user-name">안대근</div>
+          </div>
+          <div class="phone-wrap">
+            <label for="user-phone">전화번호</label>
+            <div class="phone-icon-wrap">
+              <input id="user-phone" type="tel">
+              <img src="../storage/img/ckIcon.png" alt="check-icon">
+            </div>
+            <div class="phone-text">전화번호 입력해라!</div>
+          </div>
+          <div class="license-wrap">
+            <label for="user-license">인증번호</label>
+            <div class="license-icon-wrap">
+              <input id="user-license" type="text">
+              <div class="license-btn-wrap">
+                <img src="../storage/img/ckIcon.png" alt="check-icon">
+                <button class="license-btn-hidden">인증번호 전송</button>
+                <button class="license-btn-hidden">인증번호 확인</button>
+              </div>
+            </div>
+            <div class="license-text">문자 발송 했다!!</div>
+          </div>
+          <div class="job-wrap">
+            <div class="label">직무</div>
+            <div class="user-job">교사</div>
+          </div>
+          <div class="email-wrap">
+            <label for="user-email">이메일</label>
+            <div class="email-icon-wrap">
+              <input id="user-email" type="email">
+              <img src="../storage/img/ckIcon.png" alt="check-icon">
+            </div>
+            <div class="email-text">이메일 입력해라!</div>
+          </div>
+        </form>
+        <button class="my-frm-btn" form="my-frm" type="button">정보수정</button>
+      </div>
+    </section>
+    
+  </main>
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a7bc73fb550d50d510296af57950207"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    // 클릭한 위치에 마커를 표시합니다 
+    addMarker(mouseEvent.latLng);             
+});
+
+// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+var markers = [];
+
+// 마커 하나를 지도위에 표시합니다 
+addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
+
+// 마커를 생성하고 지도위에 표시하는 함수입니다
+function addMarker(position) {
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: position
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+    
+    // 생성된 마커를 배열에 추가합니다
+    markers.push(marker);
+}
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setMarkers(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }            
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showMarkers() {
+    setMarkers(map)    
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);    
+}
+</script>
+</body>
+</html>

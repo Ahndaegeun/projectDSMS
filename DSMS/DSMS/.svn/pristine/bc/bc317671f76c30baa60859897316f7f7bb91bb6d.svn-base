@@ -1,0 +1,148 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/class-room.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+</head>
+<body>
+<div class="body__container">
+
+	<jsp:include page="main-nav.jsp" flush="false"/>
+	
+	<main>
+		<div class="btn-wrap">
+			<button class="mod" type="button">수정</button>
+			<button class="add" type="button">추가</button>
+			<button class="del" type="button">삭제</button>
+		</div>
+		<div id="recruitGrid"></div>
+	</main>
+
+</div>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script type="text/javascript">
+const Grid = tui.Grid;  //인스턴스 객체 생성
+const recruitData = [
+  {
+    room: "없음",
+    name: "안대근",
+    teacher: "없음",
+    tel: ""
+  }
+]
+
+const recruitGrid = new Grid({
+  el: document.getElementById('recruitGrid'),
+  rowHeaders: ['checkbox'],
+  bodyHeight: 680,
+  columns: [
+    {
+      header: '반',
+      name: 'room',
+      align: 'center',
+      editor: {
+    	  type: 'select',
+    	  options: {
+    		  listItems: [
+    			  {
+    				  text: '없음',
+    				  value: '없음'
+    			  },
+    			  {
+    				  text: '401호',
+    				  value: '401호'
+    			  },
+    			  {
+    				  text: '402호',
+    				  value: '402호'
+    			  },
+    			  {
+    				  text: '403호',
+    				  value: '403호'
+    			  },
+    			  {
+    				  text: '404호',
+    				  value: '404호'
+    			  },
+    			  {
+    				  text: '405호',
+    				  value: '405호'
+    			  },
+    			  {
+    				  text: '406호',
+    				  value: '406호'
+    			  },
+    			  {
+    				  text: '301호',
+    				  value: '301호'
+    			  },
+    			  {
+    				  text: '302호',
+    				  value: '302호'
+    			  }
+    		  ]
+    	  }
+      }
+    },
+    {
+      header: '이름',
+      name: 'name',
+      align: 'center'
+    },
+    {
+      header: '담임 교사',
+      name: 'teacher',
+      align: 'center',
+      editor: {
+    	  type: 'select',
+    	  options: {
+    		  listItems: [
+    			  {
+    				  text: '없음',
+    				  value: '없음'
+    			  },
+    			  {
+    				  text: "박성룡",
+    				  value: "박성룡"
+    			  },
+    			  {
+    				  text: "이성엽",
+    				  value: "이성엽"
+    			  },
+    			  {
+    				  text: "송중호",
+    				  value: "송중호"
+    			  },
+    			  {
+    				  text: "하재관",
+    				  value: "하재관"
+    			  },
+    			  {
+    				  text: "김정환",
+    				  value: "김정환"
+    			  }
+    		  ]
+    	  }
+      }
+    },
+    {
+      header: '교사 전화 번호',
+      name: 'tel',
+      align: 'center',
+      editor: 'text'
+    }
+  ],
+  data: recruitData
+});
+
+Grid.applyTheme('striped');
+</script>
+</body>
+</html>

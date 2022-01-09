@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="javax.websocket.Session"/>
+    <fullyQualifiedTypeName name="service.BoardServiceImpl"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="vo.ChatRoomVO"/>
+    <fullyQualifiedTypeName name="vo.ChatListVO"/>
+    <fullyQualifiedTypeName name="vo.ChatDetailVO"/>
+    <fullyQualifiedTypeName name="util.JSONUtil"/>
+    <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="vo.ApplicantVO"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="vo.MemberVO"/>
+    <fullyQualifiedTypeName name="service.MemberServiceImpl"/>
+    <fullyQualifiedTypeName name="vo.StudentVO"/>
+    <fullyQualifiedTypeName name="util.CryptoUtil"/>
+    <fullyQualifiedTypeName name="vo.ClassRoomVO"/>
+    <fullyQualifiedTypeName name="vo.StudentOfClassRoomVO"/>
+    <fullyQualifiedTypeName name="vo.LicenseVO"/>
+    <fullyQualifiedTypeName name="vo.ProjectResultVO"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.ha.tcp.SendMessageData"/>
+    <fullyQualifiedTypeName name="util.MessageUtil"/>
+</qualifiedTypeNameHistroy>

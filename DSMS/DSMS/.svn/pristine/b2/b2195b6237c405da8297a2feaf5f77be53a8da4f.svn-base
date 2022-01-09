@@ -1,0 +1,320 @@
+<%@page import="vo.MemberVO"%>
+<%@page import="vo.ChatRoomVO"%>
+<%@page import="vo.ChatListVO"%>
+<%@page import="vo.ChatDetailVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+List<ChatListVO> chatRoomList = (List<ChatListVO>) request.getAttribute("chatRoom");
+// int member_idx = (int) request.getSession().getAttribute("member_idx");
+MemberVO mvo = (MemberVO) request.getSession().getAttribute("user");
+int member_idx = mvo.getMember_idx();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/chat.css" />
+</head>
+<body>
+<div class="body__container">
+
+
+	<jsp:include page="main-nav.jsp" flush="false">
+  		<jsp:param name="job" value="${user.getMember_job()}"></jsp:param>
+  	</jsp:include>
+	
+	<main>
+		<section>
+		
+			<article class="list">
+				<form action="">
+					<input type="text" placeholder="대화방 검색" id="search-chat-room"/>
+					<button type="button"><img src="../storage/img/addBtn.png" alt="add" /></button>
+				</form>
+				<ul>
+				<%
+				for (ChatListVO list : chatRoomList) {
+				%>
+					<li class="chat-list-item" name="<%=list.getChat_room_idx() %>" onclick="connecting()">
+						<span>- <%=list.getMember_name() %></span>
+						<span><%=list.getChat_detail_content() %></span>
+					</li>
+				<%
+				}
+				%>
+				</ul>
+			</article>
+			
+			<article class="contents-wrap">
+				<div class="user"></div>
+				<div class="contents">
+					<!-- 채팅 내용 -->
+				</div>
+				<form>
+					<input type="text" id="chat-input" onkeyup="enterKey()"/>
+<!-- 					<button type="button" id="submit-btn" onclick="sendMessage()">전송</button> -->
+				</form>
+			</article>
+			
+		</section>
+	</main>
+
+</div>
+
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<!-- <script type="text/javascript" src="../js/chat.js"></script> -->
+
+<script type="text/javascript">
+let roomNumber;
+
+	$('.chat-list-item').on('click', function() {
+		roomNumber = $(this).attr('name');
+		$.ajax({
+			url: '/chat?cmd=chattingDetail',
+			data: {
+				room : $(this).attr('name')
+			},
+			success: function(res) {
+				let code = '<ul>';
+				$.each(res, function(i) {
+					let str = res[i].allMemberName;
+					$('.user').html(str);
+					
+					if ("<%=member_idx%>" === res[i].memberIdx) {
+						code += '<li class="me">'
+					} else {
+						code += '<li class="other">'
+					}
+				code += 	'<span class="name">' + res[i].memberName + '</span><br>';
+				code +=		'<span class="item">' + res[i].chatDetailContent + '</span><br>';
+				code +=		'<span class="date">' + res[i].chatDetailDate + '</span>';						
+				code += '</li>';
+				});
+				code += '</ul>';
+				$('.contents').html(code);
+				contents.scrollTop = 9999999;
+			},
+			dataType : 'json'
+		})
+	})
+	
+	$('#search-chat-room').keyup(function(){
+		let word = $(this).val()
+		$.ajax({
+			url : '/chat?cmd=searchChatRoom',
+			data : {
+				searchWord : word
+			},
+			success : function(res){
+				let code = '';
+				$.each(res, function(i) {
+					code += '<li class="chat-list-item" name="' + res[i].chatRoomIdx + '" onclick="connecting()">';
+					code += 	'<span>- ' + res[i].memberName + '</span>';
+					code += 	'<span>' + res[i].chatDetailContent + '</span>';
+					code += '</li>';
+				});
+				$('.list ul').html(code);
+			},
+			error : function(e) {
+				console.log(e)
+			},
+			dataType : 'json'
+		});
+	});
+	
+	/*$('#submit-btn').on('click', function(){
+		$.ajax({
+			url : '/chat?cmd=sendChatting',
+			data : {
+				contents : $('#chat-input').val()
+			},
+			success : function(res) {
+				console.log(res)
+				
+				let code = '<ul>';
+				$.each(res, function(i) {
+// 					let str = res[i].allMemberName;
+// 					$('.user').html(str);
+					code += '<li class="me">'
+					code += 	'<span class="name">' + res[i].memberName + '</span><br>';
+					code +=		'<span class="item">' + res[i].chatDetailContent + '</span><br>';
+					code +=		'<span class="date">' + res[i].chatDetailDate + '</span>';						
+					code += '</li>';
+				});
+				code += '</ul>';
+				$('.contents').html(code);
+			},
+			dataType : 'json'
+		});
+	});*/
+	
+	
+	// -------------------------------------------------------------------------------
+	// 웹소켓
+	// -------------------------------------------------------------------------------
+	var webSocket = null; // 웹소켓 변수 선언
+    var contents = document.querySelector(".contents"); // 채팅방 내용 출력되는 부분
+   	var chatInput = document.querySelector("#chat-input"); // 채팅 내용 입력하는 부분
+   	var userText = <%=member_idx%>
+   	var currentTime = new Date();
+	
+   	function connecting() {
+   	    //웹소켓 초기화
+   	    webSocket = new WebSocket("ws://localhost:8088/webSocketChatting");
+
+
+   	    // 처음 접속 성공하면 
+   	    webSocket.onopen = function onOpen(event) {
+   	        // 					document.getElementById("connectArea").style.display = "none";
+
+   	        // 					document.getElementById("chatRoom").style.display = "block";
+   	        // 					document.getElementById("chatArea").style.display = "block";
+   	        // webSocket.send(userText.value);
+   	        webSocket.send(createMessage("connect", "9999", userText));
+
+   	    }
+
+
+   	    //메시지가 오면 contents요소에 메시지를 추가한다.
+   	    webSocket.onmessage = function processMessage(message) {
+   	        //Json 풀기
+   	        var jsonData = JSON.parse(message.data);
+   	        console.log(jsonData);
+   	        if (jsonData.message != null) {
+	   	        let msg = '';
+   	        	////////////////////////////////////////////////////////////
+				if (<%=member_idx%> === jsonData.member_idx) {
+		   	   		msg = '<li class="me">';
+		   	   		
+		   	   		
+		   	   		// *****************************************************
+		   	   		
+			   	   	msg +=       '<span class="item">'+ chatInput +'</span><br>';
+				    msg +=       '<span class="date">'+ currentTime.toLocaleTimeString() +'</span>';
+				} else {
+					let msg = '<li class="other">';
+				    msg +=       '<span class="name">' + jsonData.name + '</span><br>';
+				    msg +=       '<span class="item">' + jsonData.message + '</span><br>';
+// 				    msg +=       '<span class="date">' + jsonData.date + '</span>';
+				    msg +=       '<span class="date">' + jsonData.date.toLocaleTimeString() + '</span>';
+				}
+			    msg +=    '</li>';
+	    		$('.contents ul').append(msg);
+   	        	////////////////////////////////////////////////////////////
+//    	        	contents.value += jsonData.message + "\n"
+   	            contents.scrollTop = 9999999;
+   	        };
+
+   	    }
+
+   	    webSocket.onerror = function showErrorMsg(event) {
+   	        alert("오류 : " + event.data);
+   	    }
+
+   	    
+	    webSocket.onclose = function(event){
+	        contents.value = "";
+	        chatInput.value = "";
+// 	        userText.value = "";
+// 	        document.getElementById("connectArea").style.display = "block";
+// 	        document.getElementById("chatRoom").style.display = "none";
+// 	        document.getElementById("chatArea").style.display = "none";
+	    }
+   	    
+
+   	}
+
+   	// 메시지 구조  {"command" : "명령종류", "room" : "채팅방이름", "message" : "메시지" }
+   	// 명령 종류 : "create" - 채팅방 만들기, "change" - 채팅방 이동, "message" - 메시지 전송, "connect" - 처음 접속
+
+
+   	//메시지 보내기
+   	function sendMessage() {
+   	    if (chatInput.value.trim() == "") {
+   	        chatInput.focus();
+   	        return;
+   	    }
+//    	    var room = document.querySelector(".chat-list-item").innerHTML.trim();
+   	    var room = roomNumber
+   		
+   	    //webSocket.send('{"room" : "' + "전체" + '", "message" : "' + chatInput.value + '"}' );
+
+   	    const resultStr = chatInput.value.replaceAll('"', '\\\"');
+   	    console.log('resultStr >> ' + resultStr);
+   	    
+// 	    let msg = '<li class="me">';
+// 	    msg +=       '<span class="name"> 이름!! </span><br>';
+// 	    msg +=       '<span class="item">' + resultStr + '</span><br>';
+// 	    msg +=       '<span class="date"> 날짜!! </span>';
+// 	    msg +=    '</li>';
+// 	    $('.contents ul').append(msg);
+// 	    contents.scrollTop = 9999999;
+	    
+   	    webSocket.send(createMessage("message", room, (resultStr + "." + room)));
+//    	    webSocket.send(createMessage("message", room, resultStr));
+
+   	    // webSocket.send( createMessage("message", room, chatInput.value) );
+   	    chatInput.value = "";
+   	}
+
+   	/*
+   	// 채팅방 만들기
+   	function createRoom(){
+   	    var newRoom = document.getElementById("newRoomName");
+   	    if(newRoom.value==""){
+   	        alert("생성할 채팅방을 입력한 후 사용하세요.")
+   	        newRoom.focus();
+   	        return;
+   	    }
+   	    webSocket.send( createMessage("create", newRoom.value, null) );
+   	    newRoom.value = ""; 
+   	}
+
+   	// 채팅방 이동
+   	function chatRoomIn(){
+   	    var selectRoom = document.getElementById("chatRoomList")
+   	    if(selectRoom.selectedIndex==-1 || selectRoom.value==""){
+   	        alert("이동할 채팅방을 선택한 후 사용하세요.");
+   	        return;
+   	    }
+   	    webSocket.send( createMessage("change", selectRoom.value, null) );
+   	}
+
+   	// 채팅방 나가기  ==> 즉, '전체' 채팅방으로 이동
+   	function chatRoomOut(){
+   	    webSocket.send( createMessage("change", "전체", null) );
+   	}
+   	*/
+
+   	// 전송할 메시지를 작성하는 함수
+   	function createMessage(command, room, message) {
+   	    return '{"command" : "' + command + '", "room" : "' + room + '", "message" : "' + message + '"}'
+   	}
+
+   	/*
+   	    function closing(){
+   	        webSocket.close();
+   	    }
+   	    
+   	    window.onbeforeunload = function(){
+   	        closing();
+   	    }
+   	*/
+
+   	// 엔터키를 눌러도 전송이 되도록 설정한다.
+   	function enterKey() {
+   		console.log(1)
+//    	    if (window.event.keyCode == 13) {
+//    	        sendMessage();
+//    	    }
+   	}
+   	
+
+</script>
+</body>
+</html>

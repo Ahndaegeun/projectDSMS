@@ -1,0 +1,11 @@
+content_assist_disabled_computers=org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.jdt.ui.javaPostfixProposalCategory\u0000org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.jdt.ui.javaChainProposalCategory\u0000
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="service.IBoardService"><rhs name\="service.BoardServiceImpl"/></lhs><lhs name\="service.BoardServiceImpl"><rhs name\="service.BoardServiceImpl"/></lhs><lhs name\="vo.MemberVO"><rhs name\="vo.MemberVO"/></lhs><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.List"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="vo.ChatDetailVO"><rhs name\="vo.ChatDetailVO"/></lhs><lhs name\="vo.ChatRoomVO"><rhs name\="vo.ChatRoomVO"/></lhs><lhs name\="vo.ChatListVO"><rhs name\="vo.ChatListVO"/></lhs><lhs name\="vo.ApplicantVO"><rhs name\="vo.ApplicantVO"/></lhs><lhs name\="vo.ClassRoomVO"><rhs name\="vo.ClassRoomVO"/></lhs><lhs name\="vo.StudentVO"><rhs name\="vo.StudentVO"/></lhs><lhs name\="vo.ProjectResultVO"><rhs name\="vo.ProjectResultVO"/></lhs><lhs name\="vo.LicenseVO"><rhs name\="vo.LicenseVO"/></lhs></history>
+content_assist_number_of_computers=20
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=21
+spelling_locale_initialized=true
+typefilter_migrated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

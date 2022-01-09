@@ -1,0 +1,46 @@
+@import url(global.css);
+
+.manage-nav button {
+	color: #ffffff;
+}
+
+.manage-nav .nav-hidden {
+	height: 200px;
+	padding-left: 20px;
+}
+
+.room-nav a {
+	color: #ffffff;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn-wrap {
+	margin-bottom: 10px;
+	display: block;
+	width: 80vw;
+	text-align: right;
+}
+
+.btn-wrap button {
+	color: #999999;
+	font-size: 20px;
+	border: 1px solid #999999;
+	background: none;
+	border-radius: 5px;
+	margin-left: 10px;
+	transition: color .2s ease;	
+}
+
+.btn-wrap button:hover {
+	color: #000000;
+}
+
+#recruitGrid {
+	width: 80vw;
+}

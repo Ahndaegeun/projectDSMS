@@ -1,0 +1,7 @@
+package vo;
+
+public class ProjectResultVO {
+    private int student_idx;
+    private String project_division;
+    private String project_content;
+}

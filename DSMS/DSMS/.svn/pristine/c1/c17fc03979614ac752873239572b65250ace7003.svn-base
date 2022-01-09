@@ -1,0 +1,44 @@
+package controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import service.CompanyServiceImpl;
+import service.ICompanyService;
+import vo.NoticeCompanyVO;
+
+@WebServlet("/company")
+public class CompanyController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public CompanyController() {}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ICompanyService companyService = CompanyServiceImpl.getInstance();
+		RequestDispatcher rd = null;
+		
+		String cmd = request.getParameter("cmd");
+		
+		if (cmd.equals("map")) {
+			request.setAttribute("map", companyService.getAllWorkCompany());
+			rd = request.getRequestDispatcher("/WEB-INF/views/map.jsp");
+		} else if (cmd.equals("notice")) {
+			List<NoticeCompanyVO> allNoticeCompany = companyService.getAllNoticeCompany();
+			request.setAttribute("NoticeCompanyList", allNoticeCompany);
+			rd = request.getRequestDispatcher("/WEB-INF/views/company.jsp");
+		}
+		rd.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

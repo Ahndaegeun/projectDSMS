@@ -1,0 +1,139 @@
+<%@page import="vo.AttendanceVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%List<AttendanceVO> list = (List<AttendanceVO>)request.getAttribute("AllAttendance");
+  List<String> aList = (List<String>)request.getAttribute("AllAttendanceStudentName");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/attendance.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+</head>
+<body>
+<div class="body__container">
+
+	<jsp:include page="main-nav.jsp" flush="false">
+  		<jsp:param name="job" value="${user.getMember_job()}"></jsp:param>
+  	</jsp:include>
+	
+	<main>
+		<section class="list">
+			<input type="text" placeholder="학생 검색"/>
+			<ul>	
+
+ 				<%for (int i = 0; i < aList.size(); i++) { 
+				out.print("<li>" + aList.get(i) + "</li>");
+				
+			}%> 
+				
+ 		 
+				
+				
+<!-- 				<li>- 임창균</li> -->
+<!-- 				<li>- 유제이</li> -->
+<!-- 				<li>- 김주현</li> -->
+<!-- 				<li>- 박혜성</li> -->
+<!-- 				<li>- 이희열</li> -->
+<!-- 				<li class="clicked">- 유영진</li> -->
+<!-- 				<li>- 임태희</li> -->
+<!-- 				<li>- 강주희</li> -->
+<!-- 				<li>- 조원혜</li> -->
+<!-- 				<li>- 이나영</li> -->
+<!-- 				<li>- 이인환</li> -->
+<!-- 				<li>- 윤주원</li> -->
+<!-- 				<li>- 한주연</li> -->
+<!-- 				<li>- 서유리</li> -->
+<!-- 				<li>- 권영채</li> -->
+<!-- 				<li>- 박수정</li> -->
+<!-- 				<li>- 최가현</li> -->
+<!-- 				<li>- 구현수</li> -->
+<!-- 				<li>- 서혜란</li> -->
+<!-- 				<li>- 이준석</li> -->
+<!-- 				<li>- 봉현민</li> -->
+<!-- 				<li>- 유재면</li> -->
+<!-- 				<li>- 윤효주</li> -->
+<!-- 				<li>- 김다윤</li> -->
+			</ul>
+		</section>
+	
+		<section class="detail">
+		
+			
+			<div id="recruitGrid"></div>
+		
+		</section>
+	</main>
+
+</div>
+
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script>
+const Grid = tui.Grid;  //인스턴스 객체 생성
+const recruitData = [
+	<%for(AttendanceVO vo : list){%>
+	{
+   	  
+	'month': '<%
+		out.print(vo.getAttend_date().substring(3, 5));
+	%>',
+    'day': '<%
+    		out.print(vo.getAttend_date().substring(6, 8));
+    		%>',
+    'state': '<%
+		    if(vo.getAttend_division().equals("1")){
+		    	out.print("출석");} else{
+		    		out.print("결석");
+    	}%>',
+    'check-in': '<%=vo.getAttend_in_time()%>',
+    'check-out': '<%=vo.getAttend_out_time()%>'
+  },
+	<%System.out.println(vo.getAttend_date());
+	}%>
+]
+
+const recruitGrid = new Grid({
+  el: document.getElementById('recruitGrid'),
+  scrollX: true,
+  columns: [
+	
+    {
+      header: '월',
+      name: 'month',
+      align: 'center'
+    },
+    {
+      header: '일',
+      name: 'day',
+      align: 'center'
+    },
+    {
+      header: '출결 상태',
+      name: 'state',
+      align: 'center'
+    },
+    {
+      header: '입실 시간',
+      name: 'check-in',
+      align: 'center'
+    },
+    {
+      header: '퇴실 시간',
+      name: 'check-out',
+      align: 'center'
+    }
+  ],
+	
+  data: recruitData
+});
+
+recruitGrid.resetData(newData); 
+Grid.applyTheme('striped'); 
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* Common */
+.body__container {
+  grid-template-columns: .7fr 2fr min-content;
+}
+
+/* Login Nav */
+nav .login-nav {
+  padding: 30px;
+}
+
+.login-nav-top a {
+  margin-right: 15px;
+}
+
+.login-nav-top a img {
+  width: 90px;
+}
+
+.title-wrap {
+  font-size: 18px;
+}
+
+.title-wrap h1 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.info-list {
+  font-size: 16px;
+}
+
+/* Sign Up Main */
+.sign-up {
+  width: 80%;
+}
+
+#sign-up-frm [class$="-wrap"] span {
+  font-size: 14px;
+}
+
+[class^="print"] {
+  font-size: 16px;
+}
+
+/* footer */
+.login-side-bar.show-btn {
+  width: 260px;
+}

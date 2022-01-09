@@ -1,0 +1,6 @@
+package vo;
+
+public class LicenseVO {
+    private int student_idx;
+    private String license_name;
+}

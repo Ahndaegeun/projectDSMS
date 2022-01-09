@@ -1,0 +1,98 @@
+<%@page import="vo.NoticeCompanyVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%List<NoticeCompanyVO> list = (List<NoticeCompanyVO>)request.getAttribute("NoticeCompanyList"); %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/company.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+</head>
+<body>
+<div class="body__container">
+
+	<jsp:include page="main-nav.jsp" flush="false">
+  		<jsp:param name="job" value="${user.getMember_job()}"></jsp:param>
+  	</jsp:include>
+	
+	<main>
+		<section>
+			<div class="btn-wrap">
+				<button type="button">삭제</button>
+				<button type="button">추가</button>			
+			</div>
+			<div id="recruitGrid"></div>
+		</section>
+		<section>
+			<div id="map" style="width: 100%; height: 100%;"></div>
+		</section>
+	</main>
+
+</div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a7bc73fb550d50d510296af57950207"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript" src="../js/company.js"></script>
+
+<script type="text/javascript">
+const Grid = tui.Grid;  //인스턴스 객체 생성
+let recruitData = [
+<%for (NoticeCompanyVO vo : list){%>  
+	{
+    title: "<%=vo.getCompany_name() %>",
+    addr: "<%=vo.getCompany_addr() %>",
+    salary: "<%=vo.getCompany_salary() %>",
+    section: "<%=vo.getCompany_section() %>",
+    intake: "<%=vo.getRecuruit_intake() %>"
+  },
+<%}%>
+]
+
+const recruitGrid = new Grid({
+  el: document.getElementById('recruitGrid'),
+  rowHeaders: ['checkbox'],
+  bodyHeight: 720,
+  columns: [
+    {
+      header: '회사명',
+      name: 'title',
+      align: 'center',
+      editor: 'text'
+    },
+    {
+      header: '주소',
+      name: 'addr',
+      align: 'center',
+      editor: 'text'
+    },
+    {
+      header: '제시 연봉',
+      name: 'salary',
+      align: 'center',
+      editor: 'text'
+    },
+    {
+      header: '모집 분야',
+      name: 'section',
+      align: 'center',
+      editor: 'text'
+    },
+    {
+      header: '채용인원',
+      name: 'intake',
+      align: 'center',
+      editor: 'text'
+    }
+  ],
+  data: recruitData
+});
+
+Grid.applyTheme('striped');
+</script>
+</body>
+</html>

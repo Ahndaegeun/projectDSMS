@@ -1,0 +1,122 @@
+/* Login Nav */
+.login-nav-top a img {
+  width: 40px;
+}
+
+.title-wrap {
+  font-size: 12px;
+}
+
+.info-list {
+  font-size: 8px;
+}
+
+/* Login Main */
+.login h2 {
+  font-size: 22px;
+  line-height: 1.3;
+  margin-bottom: 30px;
+}
+
+#login-frm label {
+  font-size: 20px;
+}
+
+#login-frm input {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.login-text {
+  font-size: 16px;
+}
+
+.login-btn {
+  font-size: 22px;
+}
+
+.login-link-wrap button {
+  font-size: 16px;
+}
+
+/* Sign Up Main */
+#sign-up-frm {
+  margin-bottom: 10px;
+}
+
+#sign-up-frm [class$="-wrap"] label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#sign-up-frm [class$="-wrap"] input {
+  padding: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#sign-up-frm [class$="-wrap"] span {
+  margin-bottom: 10px;
+  font-size: 10px;
+}
+
+.job-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#sign-up-frm .job-wrap label {
+  font-size: 12px;
+}
+
+[class$="-icon-wrap"] img {
+  width: 18px;
+}
+
+[class$="-icon-wrap"] [class$="-license"] {
+  font-size: 8px;
+}
+
+.sign-up-btn {
+  width: 200px;
+  font-size: 16px;
+}
+
+/* Search Info */
+.search-info {
+  width: 90%;
+}
+
+.search-info form [class$="-wrap"] {
+  font-size: 16px;
+}
+
+.search-info form label {
+  margin-bottom: 10px;
+}
+
+.search-info form input {
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+[class^="print"] {
+  font-size: 12px;
+  margin-bottom: 30px;
+}
+
+.search-info button {
+  font-size: 16px;
+}
+
+/* footer */
+.login-side-bar.show-btn {
+  width: 180px;
+}
+
+.side-bar-btn-group button {
+  font-size: 14px;
+  width: 140px;
+  padding: 10px 0 ;
+}
